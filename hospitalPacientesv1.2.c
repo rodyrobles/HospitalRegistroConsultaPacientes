@@ -23,18 +23,18 @@ Los valores van de 1 a 5, donde 5 representa el máximo grado de gravedad.
 */
 
 void dibujarMarco();
+void dibujarMarco2();
 
-
-int main(){
-
-	struct paciente {
+struct paciente {
 		char fecha[10];
 		char nombreApellido[50];
 		int edad;
 		char sexo; //flush
 		int condicion;	
-	} pacientes[100];
-	
+	} pacientes[2];
+
+int main(){
+
 	int contador=0, i, posPaciente, selec1, selec2, selec3;
 	char nombreRegistrado[50], buscarNombre[50];
 	
@@ -46,7 +46,9 @@ int main(){
 		
 		gotoxy(21,3); printf("Hospital Angeles y Santos A.C.");
 		gotoxy(17,5); printf("Programa para el registro de pacientes");
+		highvideo();textbackground(GREEN);
 		gotoxy(5,8);  printf("Menu principal");
+		lowvideo();textbackground(BLACK);
 		gotoxy(5,10); printf("1) Registrar un paciente");
 		gotoxy(5,11); printf("2) Buscar un paciente");
 		gotoxy(5,12); printf("3) Salir\n");
@@ -62,7 +64,9 @@ int main(){
 		
 			gotoxy(21,3); printf("Hospital Angeles y Santos A.C.");
 			gotoxy(17,5); printf("Programa para el registro de pacientes");
+			highvideo();textbackground(GREEN);
 			gotoxy(5,8);  printf("Menu de Registro");
+			lowvideo();textbackground(BLACK);
 			gotoxy(5,10); printf("1) Registro de datos");
 			gotoxy(5,11); printf("2) Regresar al menu principal\n");
 			gotoxy(5,14); printf("Elige una opci%cn: ",162);
@@ -72,27 +76,32 @@ int main(){
 				
 			case 1: //registro
 			system("cls");
-			printf("\t Registro de pacientes \n\n");
+			dibujarMarco2();
+			gotoxy(21,3); printf("Hospital Angeles y Santos A.C.");
+			gotoxy(17,5); printf("Programa para el registro de pacientes");
+			highvideo();textbackground(GREEN);
+			gotoxy(25,8);  printf("Registro de pacientes\n\n");
+			lowvideo();textbackground(BLACK);
 			
-			if (contador>=100)
-				printf("\nEl hospital esta lleno\n");
+			if (contador>=2)
+				printf("\n\tEl hospital esta lleno\n");
 			
 			else {
-				printf("Ingresa los datos del paciente\n");
-				printf("Numero de registro:%.3d\n", contador+1);
-				printf("Fecha de ingreso [dd-mm-aa]: ");
+				printf("\tIngresa los datos del paciente\n");
+				printf("\tNumero de registro: %.3d\n\n", contador+1);
+				printf("\tFecha de ingreso [dd-mm-aa]: ");
 				scanf("%s", pacientes[contador].fecha);
-				printf("nombre y apellido paterno: ");
+				printf("\tnombre y apellido paterno: ");
 				fflush(stdin); //limpia buffer del teclado
 				gets(pacientes[contador].nombreApellido);
-				printf("edad: ");
+				printf("\tedad: ");
 				scanf("%d", &pacientes[contador].edad);
-				printf("sexo (m/f): ");
+				printf("\tsexo (m/f): ");
 				fflush(stdin); //limpia buffer del teclado
 				scanf("%c", &pacientes[contador].sexo);
-				printf("condicion del paciente 1 al 5, de leve a grave: ");
+				printf("\tcondicion del paciente 1 al 5, de leve a grave: ");
 				scanf("%d", &pacientes[contador].condicion);
-				printf("\nRegistro exitoso\n\n");
+				printf("\n\tRegistro exitoso\n\n");
 				contador++;		
 			}
 				system ("pause");
@@ -111,7 +120,9 @@ int main(){
 		
 			gotoxy(21,3); printf("Hospital Angeles y Santos A.C.");
 			gotoxy(17,5); printf("Programa para la consulta de pacientes");
+			highvideo();textbackground(GREEN);
 			gotoxy(5,8);  printf("Menu de Consulta");
+			lowvideo();textbackground(BLACK);
 			gotoxy(5,10); printf("1) Consulta de datos");
 			gotoxy(5,11); printf("2) Regresar al menu principal\n");
 			gotoxy(5,14); printf("Elige una opci%cn :",162);
@@ -121,13 +132,21 @@ int main(){
 				case 1: //consulta
 				
 				system("cls");
-				printf("\t Consulta de pacientes \n\n");
-				printf("Ingresa Nombre y apellido paterno del paciente: ");
+				dibujarMarco2();
+				
+				gotoxy(21,3); printf("Hospital Angeles y Santos A.C.");
+				gotoxy(17,5); printf("Programa para el registro de pacientes");
+				highvideo();textbackground(GREEN);
+				gotoxy(25,8);  printf("Consulta de pacientes\n\n");
+				lowvideo();textbackground(BLACK);
+				
+				printf("\tIngresa Nombre y apellido \n\tpaterno del paciente: ");
 				fflush(stdin); //limpia buffer del teclado
 				gets(buscarNombre);  
 				//printf("El paciente a buscar es: %s ",buscarNombre);
 				
-				//hacer un ciclo para que recorra los registros
+				/*No es una solucion eficiente, porque por los registros que no corresponden 
+				imprime por cada uno "No se encontro registro"*/
 				
 				for (i=0; i<contador; i++) {
 				
@@ -141,36 +160,10 @@ int main(){
 					printf("edad: %d \n", pacientes[posPaciente].edad);
 					printf("sexo: %c \n", pacientes[posPaciente].sexo);
 					printf("Condicion: %d \n", pacientes[posPaciente].condicion);
-				}	else if {
+				}	if ((strcmp(buscarNombre,nombreRegistrado)!=0)){
 						printf("No se encontro registro: \n");
-					}
 				}	
-				
-														
-					
-					
-				
-				
-				
-				/*
-				for (i=0; i<n; i++) {
-					if (empleados[i].salario>sMayor) {
-					sMayor = empleados[i].salario;
-					pMayor=i;
-					}		
-				*/
-				
-				
-				
-				/*
-																	
-				printf("fecha de ingreso:%s \n", pacientes[0].fecha);
-				printf("nombre: %s \n", pacientes[0].nombreApellido);
-				printf("edad: %d \n", pacientes[0].edad);
-				printf("sexo: %c \n", pacientes[0].sexo);
-				printf("Condicion: %d \n", pacientes[0].condicion);
-				
-				*/
+				}	
 	
 				system ("pause");
 				
@@ -191,14 +184,15 @@ printf("\n\n");
 system("pause");
 return 0;		
 		
-	} 
+} 
 	
 	
 void dibujarMarco() {
+	
+	system ("color 0a");
 	//inicio dibujo de marco
 	gotoxy(1,1); printf("%c",201);		//esq sup izq    
-  	 		
-  	  	
+  	  	  	
 	int i; 					//borde superior
 	gotoxy(2,1);
 	for (i=0; i<68; i++) 
@@ -214,7 +208,6 @@ void dibujarMarco() {
 	
 	gotoxy(70,1); printf("%c",187);		//esq sup der
 	 		
-	
 	int xVd=70, yVd=2;		//vertical derecha
 	int k;					
 	for (k=0; k<15; k++){
@@ -230,14 +223,55 @@ void dibujarMarco() {
 	
 	gotoxy(1,16); printf("%c",200);		//esq inf izq
 	
-	
 	gotoxy(2,16);  			//borde inferior
 	int m;
 	for (m=0; m<68; m++)
 	printf("%c",205); 
 	
 	gotoxy(70,16); printf("%c",188); //esq inf der
-	
-	//fin dibujo de marco
 
+	//fin dibujo de marco
 }
+
+void dibujarMarco2() {
+	
+	system ("color 0a");
+	//inicio dibujo de marco
+	gotoxy(1,1); printf("%c",201); 		//esq sup izq    
+  	
+  	int i; 					//borde superior
+	gotoxy(2,1);
+	
+	for (i=0; i<68; i++) 
+	  	printf("%c",205); 
+  	
+  	int xVi=1, yVi=2;  		//vertical izquierda
+	int j;					
+	for (j=0; j<4; j++){
+		gotoxy(xVi,yVi);	
+		printf("%c",186);  
+		yVi= yVi+1;
+	}
+	
+	gotoxy(70,1);	printf("%c",187);		//esq sup der
+	 		
+	int xVd=70, yVd=2;		//vertical derecha
+	int k;					
+	for (k=0; k<4; k++){
+		gotoxy(xVd,yVd);	
+		printf("%c",186);  
+		yVd= yVd+1;
+	}
+	
+	gotoxy(1,6);	printf("%c",200);		//esq inf izq
+	gotoxy(70,6);	printf("%c",188);		//esq inf der
+	
+	gotoxy(2,6);  			// Borde inferior
+	int l;
+	for (l=0; l<68; l++)
+	printf("%c",205);  
+	
+	//fin dibujo de marco2
+}
+
+
