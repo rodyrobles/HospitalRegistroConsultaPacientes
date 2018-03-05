@@ -23,7 +23,7 @@ struct paciente {
 
 int main(){
 
-	int  i=0, registro=0, noEncontrado=0, selec1, selec2, selec3;
+	int  i=0, registro=0, encontrado, selec1, selec2, selec3;
 	char nombreRegistrado[50], nombreBuscado[50];
 	
 	system ("color 0a");
@@ -134,21 +134,25 @@ int main(){
 					printf("Ingresa Nombre y apellido paterno: ");
 					fflush(stdin); //limpia buffer del teclado
 					gets(nombreBuscado);  
-					
 					///Busqueda -------------------------------------
+					encontrado=0;
 					for (i=0; i<10; i++) {
 						strcpy(nombreRegistrado,pacientes[i].nombreApellido);
 						
 						if (strcmp(nombreRegistrado,nombreBuscado)==0) {
 																		
-						printf("\n\tPaciente #%.3d\n",i+1);		
+							printf("\n\tPaciente #%.3d\n",i+1);		
 							printf("\tNombre: %s \n", pacientes[i].nombreApellido);
 							printf("\tEdad: %d \n", pacientes[i].edad);
 							printf("\tSexo: %c \n", pacientes[i].sexo);
 							printf("\tCondicion: %d", pacientes[i].condicion);
-													}	
+							encontrado=1; 
+						}	
 					}	//fin for
-
+						
+						if (encontrado==0) printf("\n\tNO hay registros con este nombre");
+						
+						
 					///Busqueda -------------------------------------
 					printf("\n\n");
 					system ("pause");
